@@ -29,12 +29,7 @@ This will require you to build a backend with a database to transform data and h
   birthdate: string // Format: 'YYYY-MM-DD'
   avatar: string
   ```
-  - `ACTIVITY` has two properties `comments` and `posts` that represent the activity for a user in a given month. Build the migration with the required properties.
-  ```ts
-  // Add the necessary properties.
-  comments: number
-  posts: number
-  ```
+  - `ACTIVITY` should have properties that represent `comment` and `post` activity of a given user. This will be used to get `comment_activity` and `post_activity` of a user in the current month and compared to the previous month.
 - Fill tables with fake data.
   - `USERS`: Generate 100 rows.
   - `ACTIVITY`: Generate 1 to 3 months worth of rows for each user.
