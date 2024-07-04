@@ -66,19 +66,19 @@ This will require you to build a backend with a database to transform data and h
     - `post_activity`
     - `sort_by`
     - `page`
-  - Make sure error handling and security risks are taken into account.
+  - Make sure input validation, error handling, and security risks are taken into account.
 - Create a way to get all the options available in database for `country` and send them as options for the filter input. **Only options available from the data should show.**
   - Do the same for `age`, `comment_activity` and `post_activity`. These are ranges, so the way to do this will not be the same.
+- Create an auth middleware to handle requests using tokens.
 
 ### Frontend
 > [!IMPORTANT]
-> Remember, this is a backend-focused Full-Stack Engineering role. For this part of the challenge we are mostly interested in how the frontend is built to interact with the backend and checking some frontend best practices in areas like component and utility reusability, data fetching, et cetera. No need to spend too much time on "pixel-perfect" matching the design provided.
+> Remember, this is a backend-focused Full-Stack Engineering role. For this part of the challenge we are mostly interested in how the frontend is built to interact with the backend and checking some frontend best practices in areas like component and utility reusability, data fetching, et cetera. No need to spend too much time on "pixel-perfect" design.
 
-- Following the design provided in the `files/dashboard-design.png` file, create a **dashboard** page.
-- Create the following **dashboard** sections.
+- Create the **dashboard** page with the following sections:
   - **Table**: Show the data from the `GET` request `/dashboard`.
     - Include the following columns:
-      - **Name**: Full name with the `avatar` image prefixed and the `display_name` in parenthesis.
+      - **Name**: Full name with the `avatar` image prefixed.
       - **Age**
       - **Country**
       - **Member Since**: Date provided by `created_at`.
