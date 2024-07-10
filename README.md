@@ -73,7 +73,7 @@ This will require you to build a backend with a database to transform data and h
 
 ### Frontend
 > [!IMPORTANT]
-> Remember, this is a backend-focused Full-Stack Engineering role. For this part of the challenge we are mostly interested in how the frontend is built to interact with the backend and checking some frontend best practices in areas like component and utility reusability, data fetching, et cetera. No need to spend too much time on "pixel-perfect" design.
+> Remember, this is a backend-focused Full-Stack Engineering role. For this part of the challenge we are mostly interested in how the frontend is built to interact with the backend and checking some frontend best practices in areas like component and utility reusability, data fetching, et cetera. We have provided a basic design example for you to get an idea of how it might look, but the design can vary, especially if you use a component library. No need to spend too much time on matching a "pixel-perfect" design.
 
 - Create the **dashboard** page with the following sections:
   - **Table**: Show the data from the `GET` request `/dashboard`.
@@ -92,6 +92,9 @@ This will require you to build a backend with a database to transform data and h
   - **Filters**: Show inputs to filter data in the table. The filters should be the following:
     - Select inputs for: **Country**
     - Range inputs for: **Age**, **Comment Activity**, **Post Activity**
+   
+#### Example
+<img width="1485" alt="image" src="https://github.com/loadedgg/technical-challenge-full-stack/assets/47439212/5777e0b0-8113-4067-9bda-210f69a9d8d4">
 
 ## Challenge Review Discussion
 Please prepare to discuss implementing the following features:
