@@ -94,7 +94,7 @@ This will require you to build a backend with a database to transform data and h
     - Range inputs for: **Age**, **Comment Activity**, **Post Activity**
    
 #### Example
-<img width="1485" alt="image" src="https://github.com/loadedgg/technical-challenge-full-stack/assets/47439212/5777e0b0-8113-4067-9bda-210f69a9d8d4">
+<img width="1440" alt="image" src="https://github.com/loadedgg/technical-challenge-full-stack/assets/47439212/da9373e3-9914-4df0-ab31-7419b0b6fb31">
 
 ## Challenge Review Discussion
 Please prepare to discuss implementing the following features:
