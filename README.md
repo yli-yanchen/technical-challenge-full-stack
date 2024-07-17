@@ -8,32 +8,37 @@ We want to be sensitive of the time you spend working on this, so we have design
 ## Tasks
 
 ### Overview
-For this exercise, we want you to build a basic dashboard with two sections:
+For this exercise, we want you to build a basic dashboard that shows a list of users with data about their country and their comment activity which represents the amount of comments made today and the trend which compares the amount of comments to the previous day. The dashboard should have two sections:
 - A table to show users with part of their available data.
 - A filters section to narrow down the users according to specific criteria.
 
-This will require you to build a backend with a database to transform data and handle data requests; and a frontend to show the table and make the necessary requests.
+This will require you to build a backend with a database of your choice to transform data and handle data requests; and a frontend to show the table and make the necessary requests.
 
 > [!IMPORTANT]
 > We encourage you to use our preferred tech stack **Vue.js** and **Laravel**. However, you are free to use any tools (languages, libraries, frameworks) available and are comfortable with.
 
 ### Backend
-- Build migrations for the `USERS` and `ACTIVITY` tables.
+- Build migrations for the `USERS` and `COMMENTS` tables.
   - `USERS` should have the following properties:
   ```ts
   id: number
   first_name: string
   last_name: string
-  country: string // Country Code: 'US'
+  country: string // For this exercise limit the options to: ['US', 'MX', 'CA']
   created_at: date
-  birthdate: string // Format: 'YYYY-MM-DD'
   avatar: string
   ```
-  - `ACTIVITY` should have properties that represent `comment` and `post` activity of a given user. This will be used to get `comment_activity` and `post_activity` of a user in the current month and compared to the previous month.
+  - `COMMENTS` should have the following properties:
+  ```ts
+  id: number
+  user_id: number
+  content: string
+  created_at: date
+  ```
 - Fill tables with fake data.
-  - `USERS`: Generate 100 rows.
-  - `ACTIVITY`: Generate 1 to 3 months worth of rows for each user.
-- Build models for the `USERS` and `ACTIVITY` tables.
+  - `USERS`: Generate 30 users.
+  - `COMMENTS`: Generate one week's worth of data for each user.
+- Build models for the `USERS` and `COMMENTS` tables.
 - Create a dashboard `GET` request to return all the users with the following properties:
   ```ts
   [
@@ -45,31 +50,20 @@ This will require you to build a backend with a database to transform data and h
         code: string,
         name: string
       },
-      member_since: date,
-      age: number,
       avatar: string,
       comment_activity: {
-        current_month: number,
-        trend: 'higher' | 'lower' | 'neutral' // Compared to last month.
-      },
-      post_activity: {
-        current_month: number,
-        trend: 'higher' | 'lower' | 'neutral' // Compared to last month.
+        comments_today: number,
+        trend: 'higher' | 'lower' | 'neutral' // Compared to the previous day.
       },
     }
   ]
   ```
   - Paginate the response and accept the following parameters to filter users. **Make changes to the dashboard `GET` response as you see fit.**
     - `country`
-    - `age`
-    - `comment_activity`
-    - `post_activity`
+    - `comment_activity_trend`
     - `sort_by`
     - `page`
   - Make sure input validation, error handling, and security risks are taken into account.
-- Create a way to get all the options available in database for `country` and send them as options for the filter input. **Only options available from the data should show.**
-  - Do the same for `age`, `comment_activity` and `post_activity`. These are ranges, so the way to do this will not be the same.
-- Create an auth middleware to handle requests using tokens.
 
 ### Frontend
 > [!IMPORTANT]
@@ -79,27 +73,24 @@ This will require you to build a backend with a database to transform data and h
   - **Table**: Show the data from the `GET` request `/dashboard`.
     - Include the following columns:
       - **Name**: Full name with the `avatar` image prefixed.
-      - **Age**
       - **Country**
-      - **Member Since**: Date provided by `created_at`.
-      - **Comment Activity**: Show the trend of the user's comment activity compared to last month. If the user has more than the previous, show current month's count in green; if less, show the current month's count in red; otherwise, show it in white.
-      - **Post Activity**: Same as previous column for posts.
+      - **Comment Activity**: Show the trend of the user's comment activity compared to last day. If the user has more than the previous, show current day's count in green; if less, show the current day's count in red; otherwise, show it in white.
     - Add a **Sort By** select input to sort results by:
-      - **Member Since**: Show this as the default sort. Newest to oldest.
-      - **Comment Activity**: Highest to lowest for the current month.
-      - **Post Activity**: Highest to lowest for the current month.
+      - **Member Since**: Show this as the default sort. Newest to oldest users.
+      - **Comment Activity**: Highest to lowest comment couunt for the current day.
 
-  - **Filters**: Show inputs to filter data in the table. The filters should be the following:
-    - Select inputs for: **Country**
-    - Range inputs for: **Age**, **Comment Activity**, **Post Activity**
+  - **Filters**: Show select inputs to filter data in the table. The filters should be the following:
+    - **Country**: Use the three countries from the backend (`United States of America`, `Mexico`, `Canada`). 
+    - **Comment Activity Trend**: Use the `comment_activity.trend` values (`Higher`, `Lower`, `Neutral`). 
    
 #### Example
-<img width="1440" alt="image" src="https://github.com/loadedgg/technical-challenge-full-stack/assets/47439212/da9373e3-9914-4df0-ab31-7419b0b6fb31">
+<img width="1485" alt="image" src="https://github.com/loadedgg/technical-challenge-full-stack/assets/47439212/5777e0b0-8113-4067-9bda-210f69a9d8d4">
 
 ## Challenge Review Discussion
 Please prepare to discuss implementing the following features:
 - Dynamic filtering options. Let's say we have users from different communities (`/dashboard/gaming`, `/dashboard/music`) and we want to show filters specific to their community.
-- Add a filter to show the `comment_activity.trend` during different periods. (Compared to 3 months, 6 months, 12 months.)
+- Add a filter to show the `comment_activity.trend` during different periods. (Compared to 1 week and 1 month ago.)
 - User authentication options, tokens and error handling.
 - Pros, cons and implementation of state management in the frontend.
 - Fetching data from third-party sources such as Spotify, Discord, and IGDB.
+- Returning filter options depending on available data in database. (Countries, Minimum Comments, Maximum Comments, et cetera.)
