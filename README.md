@@ -84,7 +84,7 @@ This will require you to build a backend with a database of your choice to trans
     - **Comment Activity Trend**: Use the `comment_activity.trend` values (`Higher`, `Lower`, `Neutral`). 
    
 #### Example
-<img width="1485" alt="image" src="https://github.com/loadedgg/technical-challenge-full-stack/assets/47439212/5777e0b0-8113-4067-9bda-210f69a9d8d4">
+<img width="1119" alt="image" src="https://github.com/user-attachments/assets/b61274a3-3a02-4a0a-903b-fc34b85fc419">
 
 ## Challenge Review Discussion
 Please prepare to discuss implementing the following features:
