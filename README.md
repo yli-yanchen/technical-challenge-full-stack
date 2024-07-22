@@ -77,7 +77,7 @@ This will require you to build a backend with a database of your choice to trans
       - **Comment Activity**: Show the trend of the user's comment activity compared to last day. If the user has more than the previous, show current day's count in green; if less, show the current day's count in red; otherwise, show it in white.
     - Add a **Sort By** select input to sort results by:
       - **Member Since**: Show this as the default sort. Newest to oldest users.
-      - **Comment Activity**: Highest to lowest comment couunt for the current day.
+      - **Comment Activity**: Highest to lowest comment count for the current day.
 
   - **Filters**: Show select inputs to filter data in the table. The filters should be the following:
     - **Country**: Use the three countries from the backend (`United States of America`, `Mexico`, `Canada`). 
