@@ -25,7 +25,8 @@ async function main() {
 
   const comments = [];
   for (const user of insertedUsers) {
-    for (let i = 0; i < 5; i++) {
+    const numberOfComments = faker.number.int({ min: 1, max: 500 });
+    for (let i = 0; i < numberOfComments; i++) {
       comments.push({
         user_id: user.id,
         content: faker.lorem.sentence(),
