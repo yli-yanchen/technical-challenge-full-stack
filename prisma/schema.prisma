@@ -12,3 +12,23 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        Int       @id @default(autoincrement())
+  firstName String    @map("first_name")
+  lastName  String    @map("last_name")
+  country   String    @map("country") @db.VarChar(2)
+  createdAt DateTime  @default(now()) @map("created_at")
+  avatar    String    @map("avatar")
+  comments  Comment[]
+}
+
+model Comment {
+  id       Int      @id @default(autoincrement())
+  userId   Int
+  content  String
+  createAt DateTime @default(now()) @map("created_at")
+  user     User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
