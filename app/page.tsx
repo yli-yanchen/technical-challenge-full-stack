@@ -24,7 +24,7 @@ export default function Home() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('/api/users');
+        const response = await fetch('/api/alluser');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
