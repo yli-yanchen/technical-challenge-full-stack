@@ -6,6 +6,7 @@ export async function GET(request: Request) {
     const url = new URL(request.url);
     const countryFilter = url.searchParams.get('country') || '';
     const activityFilter = url.searchParams.get('activity') || '';
+    const sortBy = url.searchParams.get('sortby') || 'member'; // Default sort by member
 
     // Base query for fetching users
     const baseQuery = {
@@ -56,6 +57,7 @@ export async function GET(request: Request) {
               ? 'Mexico'
               : 'United States',
         },
+        created_at: user.created_at,
         avatar: user.avatar,
         comments: user.comments,
         comment_activity: {
@@ -81,7 +83,23 @@ export async function GET(request: Request) {
       return countryMatch && activityMatch;
     });
 
-    return NextResponse.json(filteredUsers);
+    // Sort data based on sortBy parameter
+    const sortedUsers = filteredUsers.sort((a, b) => {
+      switch (sortBy) {
+        case 'activity':
+          return (
+            b.comment_activity.comments_today -
+            a.comment_activity.comments_today
+          );
+        case 'member':
+        default:
+          return (
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          );
+      }
+    });
+
+    return NextResponse.json(sortedUsers);
   } catch (error) {
     console.error('Error fetching users:', error);
     return new NextResponse('Internal Server Error', { status: 500 });

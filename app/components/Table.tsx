@@ -7,6 +7,7 @@ interface User {
     code: string;
     name: string;
   };
+  createdAt: string;
   avatar: string;
   comment_activity: {
     comments_today: number;

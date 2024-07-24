@@ -10,6 +10,7 @@ interface User {
     code: string;
     name: string;
   };
+  createdAt: string;
   avatar: string;
   comment_activity: {
     comments_today: number;
@@ -21,6 +22,7 @@ export default function Home() {
   const [users, setUsers] = useState<User[]>([]);
   const [countryFilter, setCountryFilter] = useState<string>('');
   const [activityFilter, setActivityFilter] = useState<string>('');
+  const [sortBy, setSortBy] = useState<string>('member'); // Default sort by member
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -28,6 +30,7 @@ export default function Home() {
         const queryParams = new URLSearchParams({
           country: countryFilter,
           activity: activityFilter,
+          sortby: sortBy,
         }).toString();
 
         const response = await fetch(`/api/filteruser?${queryParams}`);
@@ -43,7 +46,7 @@ export default function Home() {
     };
 
     fetchUsers();
-  }, [countryFilter, activityFilter]);
+  }, [countryFilter, activityFilter, sortBy]);
 
   return (
     <main className='flex min-h-screen flex-row justify-start m-8 p-8'>
@@ -77,8 +80,11 @@ export default function Home() {
 
       <section className='min-h-screen flex flex-col w-2/3 m-2 p-2 shadow-lg bg-neutral-800'>
         <div className='p-4 flex justify-end'>
-          <select className='block w-auto p-2 border bg-black border-gray-300 rounded mb-4'>
-            <option value='sortby'>Sort By</option>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className='block w-auto p-2 border bg-black border-gray-300 rounded mb-4'
+          >
             <option value='member'>Member Since</option>
             <option value='activity'>Comment Activity</option>
           </select>
