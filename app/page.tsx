@@ -62,8 +62,8 @@ export default function Home() {
       </section>
 
       <section className='min-h-screen flex flex-col w-2/3 m-2 p-2 shadow-lg bg-neutral-800'>
-        <div className='w-36 m-4 flex justify-end'>
-          <select className='block w-full p-2 border bg-black border-gray-300 rounded mb-4'>
+        <div className='p-4 flex justify-end'>
+          <select className='block w-auto p-2 border bg-black border-gray-300 rounded mb-4'>
             <option value='sortby'>Sort By</option>
             <option value='member'>Member Since</option>
             <option value='activity'>Comment Activity</option>
