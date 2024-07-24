@@ -47,7 +47,7 @@ export default function Home() {
           <h2 className='mt-4'>Country</h2>
           <select className='block w-full p-2 border bg-black border-gray-300 rounded mb-4'>
             <option value=''></option>
-            <option value='usa'>United States of America</option>
+            <option value='usa'>United States</option>
             <option value='mexico'>Mexico</option>
             <option value='canada'>Canada</option>
           </select>
@@ -71,7 +71,6 @@ export default function Home() {
         </div>
 
         <Table data={users} />
-        {/* <UserTable data={users} /> */}
       </section>
     </main>
   );
