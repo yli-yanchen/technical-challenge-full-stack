@@ -20,7 +20,7 @@ interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({ data }) => {
-  // Pagination settings
+  // Pagination setting, 5 users per page
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -48,9 +48,9 @@ const Table: React.FC<TableProps> = ({ data }) => {
 
   return (
     <div className='overflow-x-auto p-4'>
-      <table className='min-w-full border border-gray-200 rounded-lg shadow-md'>
+      <table className='min-w-full border border-gray-400 rounded-lg shadow-md'>
         <thead>
-          <tr className='bg-gray-100 text-gray-800'>
+          <tr className='bg-gray-400 text-gray-800'>
             <th className='py-3 px-4 border-b text-left'>Name</th>
             <th className='py-3 px-4 border-b text-left'>Country</th>
             <th className='py-3 px-4 border-b text-center'>Comment Activity</th>

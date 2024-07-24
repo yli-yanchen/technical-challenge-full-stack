@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Table Dashboard',
-  description: 'Get sorted',
+  description: 'Loaded.gg Technical Interview',
 };
 
 export default function RootLayout({

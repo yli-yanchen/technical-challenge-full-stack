@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Table from './components/table';
+import Table from './components/Table';
+import ErrorHandler from './components/ErrorHandler';
 
 interface User {
   id: number;
@@ -23,6 +24,7 @@ export default function Home() {
   const [countryFilter, setCountryFilter] = useState<string>('');
   const [activityFilter, setActivityFilter] = useState<string>('');
   const [sortBy, setSortBy] = useState<string>('member'); // Default sort by member
+  const [error, setError] = useState<string | null>(null); // State for error message
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -40,8 +42,10 @@ export default function Home() {
         const data = await response.json();
         console.log('>>> fetched data from backend: ', data);
         setUsers(data);
+        setError(null);
       } catch (error) {
         console.error('Failed to fetch users:', error);
+        setError('Failed to fetch users. Please try again later.');
       }
     };
 
@@ -89,6 +93,8 @@ export default function Home() {
             <option value='activity'>Comment Activity</option>
           </select>
         </div>
+
+        <ErrorHandler message={error} />
 
         <Table data={users} />
       </section>

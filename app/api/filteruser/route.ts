@@ -18,7 +18,7 @@ export async function GET(request: Request) {
     // Fetch users based on base query
     let users = await prisma.user.findMany(baseQuery);
 
-    // Transform the data to match the expected UserData format
+    // Transform the data to match the expected format
     const today = new Date();
     const todayStart = new Date(
       today.getFullYear(),
