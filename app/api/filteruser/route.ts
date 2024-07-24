@@ -1,25 +1,32 @@
 import { NextResponse } from 'next/server';
 import prisma from '../../../prisma/prisma';
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const users = await prisma.user.findMany({
+    const url = new URL(request.url);
+    const countryFilter = url.searchParams.get('country') || '';
+    const activityFilter = url.searchParams.get('activity') || '';
+
+    // Base query for fetching users
+    const baseQuery = {
       include: {
         comments: true,
       },
-    });
-    console.log('>>> users from dataset: ', users);
+    };
+
+    // Fetch users based on base query
+    let users = await prisma.user.findMany(baseQuery);
 
     // Transform the data to match the expected UserData format
-    const transformedUsers = users.map((user) => {
-      const today = new Date();
-      const todayStart = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate()
-      ).getTime();
-      const yesterdayStart = todayStart - 24 * 60 * 60 * 1000;
+    const today = new Date();
+    const todayStart = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    ).getTime();
+    const yesterdayStart = todayStart - 24 * 60 * 60 * 1000;
 
+    const transformedUsers = users.map((user) => {
       const todayComments = user.comments.filter(
         (comment) => new Date(comment.created_at).getTime() >= todayStart
       ).length;
@@ -43,11 +50,11 @@ export async function GET() {
         country: {
           code: user.country,
           name:
-            user.country == 'CA'
+            user.country === 'CA'
               ? 'Canada'
               : user.country === 'MX'
               ? 'Mexico'
-              : 'United State',
+              : 'United States',
         },
         avatar: user.avatar,
         comments: user.comments,
@@ -57,9 +64,24 @@ export async function GET() {
         },
       };
     });
-    // console.log('>>> filter users in 10 records: ', transformedUsers);
 
-    return NextResponse.json(transformedUsers);
+    // Apply filters to transformed data
+    const filteredUsers = transformedUsers.filter((user) => {
+      const countryMatch = countryFilter
+        ? user.country.code === countryFilter
+        : true;
+
+      // console.log('>>> countryFilter: ', countryFilter);
+      // console.log('>>> user.country.name: ', user.country.name);
+      // console.log('>>> user.country.code: ', user.country.code);
+
+      const activityMatch = activityFilter
+        ? user.comment_activity.trend === activityFilter
+        : true;
+      return countryMatch && activityMatch;
+    });
+
+    return NextResponse.json(filteredUsers);
   } catch (error) {
     console.error('Error fetching users:', error);
     return new NextResponse('Internal Server Error', { status: 500 });
