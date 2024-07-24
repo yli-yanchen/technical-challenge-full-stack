@@ -20,7 +20,7 @@ interface TableProps {
 }
 
 const Table: React.FC<TableProps> = ({ data }) => {
-  // Pagination settings
+  // Pagination setting, 5 users per page
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
 
