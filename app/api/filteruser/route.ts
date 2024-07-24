@@ -42,7 +42,6 @@ export async function GET() {
         name: `${user.first_name} ${user.last_name}`,
         country: {
           code: user.country,
-          // name: getCountryName(user.country),
           name:
             user.country == 'CA'
               ? 'Canada'
@@ -58,20 +57,11 @@ export async function GET() {
         },
       };
     });
+    // console.log('>>> filter users in 10 records: ', transformedUsers);
 
     return NextResponse.json(transformedUsers);
   } catch (error) {
     console.error('Error fetching users:', error);
-    return NextResponse.error();
+    return new NextResponse('Internal Server Error', { status: 500 });
   }
 }
-
-// Example helper function to get country name from code
-const getCountryName = (code: 'US' | 'CA' | 'MX') => {
-  const countryMap: Record<'US' | 'CA' | 'MX', string> = {
-    US: 'United States',
-    CA: 'Canada',
-    MX: 'Mexico',
-  };
-  return countryMap[code];
-};

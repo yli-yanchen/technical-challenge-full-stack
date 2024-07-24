@@ -29,7 +29,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "prisma/**/*.ts",
-    "prisma/seed.ts"
+    "prisma/seed.ts",
+    "app/api/filteruser"
   ],
   "exclude": ["node_modules"]
 }
