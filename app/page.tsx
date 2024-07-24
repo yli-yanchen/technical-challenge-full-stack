@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Table from './components/table';
+import Table from './components/Table';
 
 interface User {
   id: number;
