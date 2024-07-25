@@ -1,6 +1,16 @@
 # Full-Stack Techinical Challenge
 
+## How to run the application
+
+To ensure the dataset contains information only from the last 7 days, you need to clear the existing data and regenerate new fake data for the past week before running the application. Follow these steps to start the application:
+
+1. Reset the database: `npx prisma migrate reset`
+2. Reapply the migrations: `npx prisma migrate dev --name init`
+3. Seed the database with new data: `npm run seed`
+4. Start the development server: `npm run dev`
+
 ## Description
+
 The overall goal of the technical challenge is for us to get an idea of how you approach tasks, your coding style, your organization skills, and your technical experience as a full-stack engineer in general.
 
 We want to be sensitive of the time you spend working on this, so we have designed the technical challenge to be a simpler version of a task an engineer in this role would be assigned. After we review the assignment, we want to invite you back and set some time to [discuss how you would approach implementing additional features](#challenge-review-discussion).
@@ -8,7 +18,9 @@ We want to be sensitive of the time you spend working on this, so we have design
 ## Tasks
 
 ### Overview
+
 For this exercise, we want you to build a basic dashboard that shows a list of users with data about their country and their comment activity which represents the amount of comments made today and the trend which compares the amount of comments to the previous day. The dashboard should have two sections:
+
 - A table to show users with part of their available data.
 - A filters section to narrow down the users according to specific criteria.
 
@@ -18,22 +30,23 @@ This will require you to build a backend with a database of your choice to trans
 > We encourage you to use our preferred tech stack **Vue.js** and **Laravel**. However, you are free to use any tools (languages, libraries, frameworks) available and are comfortable with.
 
 ### Backend
+
 - Build migrations for the `USERS` and `COMMENTS` tables.
   - `USERS` should have the following properties:
   ```ts
-  id: number
-  first_name: string
-  last_name: string
-  country: string // For this exercise limit the options to: ['US', 'MX', 'CA']
-  created_at: date
-  avatar: string
+  id: number;
+  first_name: string;
+  last_name: string;
+  country: string; // For this exercise limit the options to: ['US', 'MX', 'CA']
+  created_at: date;
+  avatar: string;
   ```
   - `COMMENTS` should have the following properties:
   ```ts
-  id: number
-  user_id: number
-  content: string
-  created_at: date
+  id: number;
+  user_id: number;
+  content: string;
+  created_at: date;
   ```
 - Fill tables with fake data.
   - `USERS`: Generate 30 users.
@@ -66,11 +79,14 @@ This will require you to build a backend with a database of your choice to trans
   - Make sure input validation, error handling, and security risks are taken into account.
 
 ### Frontend
+
 > [!IMPORTANT]
 > Remember, this is a backend-focused Full-Stack Engineering role. For this part of the challenge we are mostly interested in how the frontend is built to interact with the backend and checking some frontend best practices in areas like component and utility reusability, data fetching, et cetera. We have provided a basic design example for you to get an idea of how it might look, but the design can vary, especially if you use a component library. No need to spend too much time on matching a "pixel-perfect" design.
 
 - Create the **dashboard** page with the following sections:
+
   - **Table**: Show the data from the `GET` request `/dashboard`.
+
     - Include the following columns:
       - **Name**: Full name with the `avatar` image prefixed.
       - **Country**
@@ -80,14 +96,17 @@ This will require you to build a backend with a database of your choice to trans
       - **Comment Activity**: Highest to lowest comment count for the current day.
 
   - **Filters**: Show select inputs to filter data in the table. The filters should be the following:
-    - **Country**: Use the three countries from the backend (`United States of America`, `Mexico`, `Canada`). 
-    - **Comment Activity Trend**: Use the `comment_activity.trend` values (`Higher`, `Lower`, `Neutral`). 
-   
+    - **Country**: Use the three countries from the backend (`United States of America`, `Mexico`, `Canada`).
+    - **Comment Activity Trend**: Use the `comment_activity.trend` values (`Higher`, `Lower`, `Neutral`).
+
 #### Example
+
 <img width="1119" alt="image" src="https://github.com/user-attachments/assets/b61274a3-3a02-4a0a-903b-fc34b85fc419">
 
 ## Challenge Review Discussion
+
 Please prepare to discuss implementing the following features:
+
 - Dynamic filtering options. Let's say we have users from different communities (`/dashboard/gaming`, `/dashboard/music`) and we want to show filters specific to their community.
 - Add a filter to show the `comment_activity.trend` during different periods. (Compared to 1 week and 1 month ago.)
 - User authentication options, tokens and error handling.
