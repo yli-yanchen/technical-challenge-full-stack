@@ -9,6 +9,10 @@ To ensure the dataset contains information only from the last 7 days, you need t
 3. Seed the database with new data: `npm run seed`
 4. Start the development server: `npm run dev`
 
+## Final Dashboard Screenshot:
+
+<img width="1119" alt="image" src="./public/submission.png">
+
 ## Description
 
 The overall goal of the technical challenge is for us to get an idea of how you approach tasks, your coding style, your organization skills, and your technical experience as a full-stack engineer in general.
