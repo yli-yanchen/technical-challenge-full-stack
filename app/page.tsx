@@ -27,6 +27,9 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null); // State for error message
 
   useEffect(() => {
+    // const { pathname } = router;
+    // let community = pathname.split('/')[2];
+
     const fetchUsers = async () => {
       try {
         const queryParams = new URLSearchParams({

@@ -3,6 +3,8 @@ import prisma from '../../../prisma/prisma';
 
 export async function GET(request: Request) {
   try {
+    // url: /api/filteruser?country=canada&activity=high&sortby=member
+
     const url = new URL(request.url);
     const countryFilter = url.searchParams.get('country') || '';
     const activityFilter = url.searchParams.get('activity') || '';
@@ -17,6 +19,11 @@ export async function GET(request: Request) {
 
     // Fetch users based on base query
     let users = await prisma.user.findMany(baseQuery);
+
+    // const commentStats = await prisma.comment.aggregate({
+    //   _min: { comments_today: true },
+    //   _max: { comments_today: true },
+    // });
 
     // Transform the data to match the expected format
     const today = new Date();
